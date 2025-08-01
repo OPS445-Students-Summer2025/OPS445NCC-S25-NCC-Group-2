@@ -6,16 +6,19 @@ import csv
 from datetime import datetime
 
 def log_operation(op_type, source, destination):
+    #Create log directory if it doesn't exist
     if not os.path.exists("logs"):
         os.mkdir("logs")
 
+    #log entry data
     log_entry = {
         "time": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
         "operation": op_type,
         "source": source,
         "destination": destination
     }
-
+    
+    #JSON log
     json_file = "logs/log.json"
     if os.path.exists(json_file):
         with open(json_file, "r") as jf:
@@ -32,7 +35,8 @@ def log_operation(op_type, source, destination):
         json.dump(data, jf, indent=2)
 
     print("JSON log saved!")
-
+    
+    #CSV log
     csv_file = "logs/log.csv"
     write_header = not os.path.exists(csv_file)
 
