@@ -2,6 +2,7 @@
 
 import os
 import json
+import csv
 from datetime import datetime
 
 def log_operation(op_type, source, destination):
@@ -31,3 +32,17 @@ def log_operation(op_type, source, destination):
         json.dump(data, jf, indent=2)
 
     print("JSON log saved!")
+
+    csv_file = "logs/log.csv"
+    write_header = not os.path.exists(csv_file)
+
+    with open(csv_file, "a", newline='') as cf:
+        writer = csv.writer(cf)
+        if write_header:
+            writer.writerow(["time", "operation", "source", "destination"])
+        writer.writerow([
+            log_entry["time"],
+            log_entry["operation"],
+            log_entry["source"],
+            log_entry["destination"]
+        ])
