@@ -36,3 +36,4 @@ def compress_from_manifest(manifest_file, output_dir):
             print("Added:", file)
 
     print("Archive created:", archive_name)
+
