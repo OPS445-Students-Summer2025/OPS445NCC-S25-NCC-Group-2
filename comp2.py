@@ -6,35 +6,35 @@ import os
 from datetime import datetime
 
 def compress_from_manifest(manifest_file, output_dir):
-    """
-    Reads a manifest file and compresses the listed files into a .tar.gz archive.
-    The output archive will be saved to the specified directory with a timestamp in its name.
-    """
-    output_dir = os.path.expanduser(output_dir)  # This fixes the ~ issue
 
-    # Check if the manifest file exists
+    # Expand ~ if it's in the output path
+    output_dir = os.path.expanduser(output_dir)
+
+    # Check if output directory exists, create it if not
+    if not os.path.isdir(output_dir):
+        os.makedirs(output_dir)
+
+    # Load file list from manifest
     if not os.path.isfile(manifest_file):
         print("Manifest file not found:", manifest_file)
         return
 
-    # Read file paths from the manifest
     with open(manifest_file, 'r') as mf:
         files = [line.strip() for line in mf if os.path.isfile(line.strip())]
 
-    # If no valid files were found, exit
     if not files:
         print("No valid files to compress.")
         return
 
-    # Create a timestamped filename in the output directory
-    timestamp = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
-    archive_name = os.path.join(output_dir, f"backup_{timestamp}.tar.gz")
+    # Timestamp + full archive path
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    filename = f"backup_{timestamp}.tar.gz"
+    archive_name = os.path.join(output_dir, filename)  # maybe fixed
 
-    # Create the .tar.gz archive
+
     with tarfile.open(archive_name, "w:gz") as tar:
         for file in files:
             tar.add(file, arcname=os.path.basename(file))
             print("Added:", file)
 
     print("Archive created:", archive_name)
-
