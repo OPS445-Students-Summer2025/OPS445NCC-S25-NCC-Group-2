@@ -10,6 +10,7 @@ def compress_from_manifest(manifest_file, output_dir):
     Reads a manifest file and compresses the listed files into a .tar.gz archive.
     The output archive will be saved to the specified directory with a timestamp in its name.
     """
+    output_dir = os.path.expanduser(output_dir)  # This fixes the ~ issue
 
     # Check if the manifest file exists
     if not os.path.isfile(manifest_file):
