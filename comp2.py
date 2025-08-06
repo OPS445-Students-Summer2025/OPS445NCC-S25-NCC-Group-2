@@ -1,11 +1,14 @@
+#Compression and timstamp function from manifest
+#Author: Fahad Rajper
+
 import tarfile
 import os
 from datetime import datetime
 
-def compress_from_manifest(manifest_file):
+def compress_from_manifest(manifest_file, output_dir):
     """
     Reads a manifest file and compresses the listed files into a .tar.gz archive.
-    The output archive will have a timestamp in its name.
+    The output archive will be saved to the specified directory with a timestamp in its name.
     """
 
     # Check if the manifest file exists
@@ -22,14 +25,13 @@ def compress_from_manifest(manifest_file):
         print("No valid files to compress.")
         return
 
-    # Create a timestamp for the archive name
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    archive_name = f"backup_{timestamp}.tar.gz"
+    # Create a timestamped filename in the output directory
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H:%M:%S")
+    archive_name = os.path.join(output_dir, f"backup_{timestamp}.tar.gz")
 
     # Create the .tar.gz archive
     with tarfile.open(archive_name, "w:gz") as tar:
         for file in files:
-            # Add each file using only its filename (not full path)
             tar.add(file, arcname=os.path.basename(file))
             print("Added:", file)
 
