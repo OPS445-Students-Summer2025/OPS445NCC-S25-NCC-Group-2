@@ -2,8 +2,6 @@
 
 import os
 import datetime
-import datetime
-import os
 
 def excluded_files(path):
     """Checks for any trash files that exist within the target path"""
