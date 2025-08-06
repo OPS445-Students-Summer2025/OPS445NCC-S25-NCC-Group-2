@@ -1,5 +1,4 @@
-# Restore function updated after team review
-
+# Restore function
 import os
 import tarfile
 import argparse
