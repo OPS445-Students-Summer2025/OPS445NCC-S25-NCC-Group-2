@@ -1,18 +1,5 @@
-#!/usr/bin/env python3
-
 import datetime
 import os
-
-'''
-OPS445 Assignment 2 - Group 2
-Program: assignment2.py: backup.py module
-Author: Ronald Lu
-Semester: Summer 2025
-
-Description: 
-Scans specified directories to identify files for full or incremental backups, excludes temporary/trash files.
-Writes a timestamped manifest file listing the files to be backed up, which will be used later for compression and restoration.
-'''
 
 def excluded_files(path):
     """Checks for any trash files that exist within the target path"""
@@ -86,4 +73,3 @@ if __name__ == "__main__":
     inc_files = incremental_backup(source_dir, last_backup)
     inc_manifest_path = manifest_timestamper("inc", manifest_path)
     file_manifest(inc_files, inc_manifest_path)
-    
