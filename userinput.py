@@ -1,3 +1,13 @@
+#!/usr/bin/env python3
+'''
+OPS445 Assignment 2 - Group 2 
+by: Pablo Gomez  
+Semester: Summer 2025  
+
+Description:  
+the code handles user input from the command line using argparse.  
+it collects required options as backup or restore,source and destination paths,directories to exclude and timestamp  
+'''
 import argparse
 import sys
 
