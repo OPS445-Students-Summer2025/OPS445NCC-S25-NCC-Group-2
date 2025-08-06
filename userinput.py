@@ -17,7 +17,6 @@ def parse_args():
     user_input.add_argument("--mode", required=True)
     user_input.add_argument("--source", required=True)
     user_input.add_argument("--destination", required=True)
-    user_input.add_argument("--exclude", nargs='*')
     user_input.add_argument("--timestamp")
 
     end = user_input.parse_args()
@@ -34,5 +33,4 @@ if __name__ == "__main__":
     print("Mode:", end.mode)
     print("Source:", end.source)
     print("Destination:", end.destination)
-    print("Exclude:", end.exclude)
     print("Timestamp:", end.timestamp)
